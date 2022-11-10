@@ -37,6 +37,7 @@ DEFAULT_PREFIX_SEPARATOR = "-"
 CURRENT_WORKING_DIR = os.getcwd()
 JSON_INDENT = 2
 LOCAL_REGION = "local"
+LOCALSTACK_REGION = "localstack"
 LOCAL_SLEEP_INTERVAL = 1  # seconds
 LOG_LEVEL = "INFO"
 MAX_BATCH_WRITE = 25  # DynamoDB limit
@@ -1256,6 +1257,15 @@ def main():
             access_key=args.accessKey,
             secret_key=args.secretKey,
             region=args.region,
+            endpoint_url="http://" + args.host + ":" + args.port,
+        )
+        sleep_interval = LOCAL_SLEEP_INTERVAL
+    elif args.region == LOCALSTACK_REGION:
+        conn = _get_aws_client(
+            service="dynamodb",
+            access_key="test",
+            secret_key="test",
+            region="us-east-1",
             endpoint_url="http://" + args.host + ":" + args.port,
         )
         sleep_interval = LOCAL_SLEEP_INTERVAL

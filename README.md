@@ -18,13 +18,16 @@ dynamodump supports local DynamoDB instances as well (tested with [DynamoDB Loca
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Script (unattended) usage](#script-unattended-usage)
-- [Docker CLI usage](#docker-cli-usage)
-- [AWS example](#aws-example)
-- [Local example](#local-example)
-- [Development](#development)
+- [dynamodump](#dynamodump)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Script (unattended) usage](#script-unattended-usage)
+  - [Docker CLI usage](#docker-cli-usage)
+  - [AWS example](#aws-example)
+  - [Local example](#local-example)
+  - [Localstack example](#localstack-example)
+  - [Development](#development)
 
 ## Installation
 
@@ -209,6 +212,24 @@ dynamodump -m restore -r local -s testTable --host localhost --port 8000 --acces
 ```
 
 Multiple table backup/restore as stated in the AWS examples are also available for local.
+
+## Localstack example
+
+The following assumes your localstack is running on localhost:4566 with default accessKey and secretKey 'test'
+
+Single table backup/restore:
+```
+dynamodump -m backup -r localstack -s "tableName" --host localhost --port 4566
+
+dynamodump -m restore -r localstack -s "tableName" --host localhost --port 4566
+```
+
+All tables backup/restore:
+```
+dynamodump -m backup -r localstack -s "*" --host localhost --port 4566
+
+dynamodump -m restore -r localstack -s "*" --host localhost --port 4566
+```
 
 ## Development
 
